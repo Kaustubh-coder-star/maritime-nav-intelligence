@@ -93,10 +93,12 @@ export default function VoyageCharts({ weatherData }: Props) {
               strokeWidth={2}
               dot={{ fill: '#00ffea', r: 4, strokeWidth: 0 }}
               activeDot={{
-                r: 6,
-                fill: '#00ffea',
-                boxShadow: '0 0 10px #00ffea',
-              }}
+  r: 6,
+  fill: '#00ffea',
+  style: {
+    filter: 'drop-shadow(0 0 6px #00ffea)',
+  },
+}}
             />
           </LineChart>
         </ResponsiveContainer>
