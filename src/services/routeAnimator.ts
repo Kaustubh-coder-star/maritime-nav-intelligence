@@ -1,4 +1,4 @@
-import type { Point } from '../types/geo';
+import type { Point as GeoPoint } from '../types/geo';
 
 export function interpolate(start: Point, end: Point, t: number): Point {
   return {
