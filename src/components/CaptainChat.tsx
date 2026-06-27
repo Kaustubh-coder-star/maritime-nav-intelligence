@@ -247,23 +247,49 @@ export default function CaptainChat({
 
   const msgId = useRef(2);
 
-  const send = (text: string) => {
+  const send = async (text: string) => {
     const q = text.trim();
     if (!q || typing) return;
+    
     const userMsg: Message = { role: 'user', text: q, id: msgId.current++ };
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
     setTyping(true);
-    const delay = 600 + Math.random() * 700;
-    setTimeout(() => {
+
+    try {
+      // Send message straight to your local n8n via ngrok tunnel
+      const response = await fetch('https://botanical-durably-coyness.ngrok-free.dev/webhook-test/maritime-chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true', // Bypasses the warning screen
+        },
+        body: JSON.stringify({
+          text: q,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) throw new Error('Webhook failed');
+      const data = await response.json();
+
+      setMessages((prev) => [
+        ...prev,
+        { role: 'captain', text: data.reply || 'Message processed.', id: msgId.current++ },
+      ]);
+    } catch (error) {
+      console.error(error);
+      // Fallback to local mock response if backend is offline
       const reply = getReply(q, waveHeight, totalHours, totalFuel);
       setMessages((prev) => [
         ...prev,
         { role: 'captain', text: reply, id: msgId.current++ },
       ]);
+    } finally {
       setTyping(false);
-    }, delay);
+    }
   };
+;
 
   const handleKey = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
