@@ -51,7 +51,7 @@ export default function CaptainChat({ waveHeight, totalHours, totalFuel }: Props
 
     try {
       // 2. Fire live HTTP POST packet transmission across the ngrok network tunnel wire
-      const response = await fetch('https://botanical-durably-coyness.ngrok-free.dev/webhook', {
+      const response = await fetch('https://ngrok-free.dev/webhook', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
