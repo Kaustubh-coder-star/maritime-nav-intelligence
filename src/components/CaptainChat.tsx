@@ -51,7 +51,7 @@ export default function CaptainChat({ waveHeight, totalHours, totalFuel }: Props
 
     try {
       // 2. Fire live HTTP POST packet transmission across the ngrok network tunnel wire
-      const response = await fetch('https://yellow-games-punch.loca.lt/webhook', {
+      const response = await fetch('https://yellow-games-punch.loca.lt/webhook/95ff2840-1f0b-40d1-ad89-7a147f97dc4e', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
