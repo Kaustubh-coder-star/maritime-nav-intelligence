@@ -49,11 +49,11 @@ const userMessageText = input.trim();
 
     try {
         // 2. Fire live HTTP POST packet transmission across the network tunnel wire
-const response = await fetch('https://yellow-games-punch.loca.lt/webhook/95ff2840-1f0b-40d1-ad89-7a147f97dc4e'
+const response = await fetch('https://botanical-durably-coyness.ngrok-free.dev/webhook-test/95ff2840-1f0b-40d1-ad89-7a147f97dc4e'
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Bypass-Tunnel-Reminder': 'true'
+                'ngrok-skip-browser-warning': '69420'
             },
             body: new URLSearchParams({
                 machinery_context: userMessageText,
@@ -62,7 +62,9 @@ const response = await fetch('https://yellow-games-punch.loca.lt/webhook/95ff284
                 total_fuel: totalFuel || '',
                 timestamp: new Date().toISOString(),
             }).toString()
-        });        if (!response.ok) {
+        });
+
+        if (!response.ok) {
             throw new Error(`HTTP network anomaly detected. Status code: ${response.status}`);
         }
       const data = await response.json();
