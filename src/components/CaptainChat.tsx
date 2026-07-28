@@ -51,11 +51,11 @@ export default function CaptainChat({ waveHeight, totalHours, totalFuel }: Props
 
     try {
       // 2. Fire live HTTP POST packet transmission across the ngrok network tunnel wire
-      const response = await fetch('https://botanical-durably-coyness.ngrok-free.dev/webhook', {
+      const response = await fetch('https://yellow-games-punch.loca.lt/webhook', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': 'true', // Bypasses free tier firewall interception landing pages
+          'Content-Type': 'application/json'
+          
         },
         body: JSON.stringify({
           machinery_context: userMessageText,
