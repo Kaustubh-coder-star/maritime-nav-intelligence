@@ -49,7 +49,7 @@ const userMessageText = input.trim();
 
     try {
         // 2. Fire live HTTP POST packet transmission across the network tunnel wire
-const response = await fetch('https://botanical-durably-coyness.ngrok-free.dev/webhook-test/webhook', {
+const response = await fetch('https://botanical-durably-coyness.ngrok-free.dev/webhook/webhook', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
