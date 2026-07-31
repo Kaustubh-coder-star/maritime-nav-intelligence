@@ -97,7 +97,22 @@ const response = await fetch('https://botanical-durably-coyness.ngrok-free.dev/w
       setIsLoading(false);
     }
   };
-
+// Background Function to Sync Live Ship Position from the Database Matrix
+    const syncShipPosition = async () => {
+        try {
+            const response = await fetch('https://botanical-durably-coyness.ngrok-free.dev/webhook/webhook', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ get_position: 'true', mmsi: '235092999' }).toString()
+            });
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Vessel Spatial Location Synchronized:", data);
+            }
+        } catch (error) {
+            console.error("Spatial telemetry link error:", error);
+        }
+    };
   return (
     <div className="flex flex-col h-[500px] w-full max-w-2xl mx-auto border border-slate-700 bg-slate-900 rounded-lg shadow-xl overflow-hidden">
       {/* Structural Top Banner Status Header */}
