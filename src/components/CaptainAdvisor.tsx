@@ -114,6 +114,7 @@ export default function CaptainAdvisor({
         >
           {advice}
         </div>
+        <FleetTrackerMap />
       </div>
     </div>
   );
