@@ -64,7 +64,7 @@ export default function FleetTrackerMap() {
                 <div className="md:col-span-2 relative h-full w-full min-h-[240px]">
                     <iframe 
                         title="Vessel Fleet Map"
-                        className="w-full h-full border-0 grayscale opacity-80 contrast-125"
+                        className="w-full h-full border-0"
                         src={`https://openstreetmap.org{lon-0.08}%2C${lat-0.04}%2C${lon+0.08}%2C${lat+0.04}&layer=mapnik&marker=${lat}%2C${lon}`}
                     ></iframe>
                     {/* Visual Radar Ring Overlay Effect */}
