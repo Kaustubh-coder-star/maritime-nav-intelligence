@@ -4,6 +4,7 @@ type Props = {
   totalFuel: number;
 };
 
+import FleetTrackerMap from './FleetTrackerMap';
 export default function CaptainAdvisor({
   waveHeight,
   totalHours,
