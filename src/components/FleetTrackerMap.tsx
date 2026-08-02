@@ -65,7 +65,7 @@ export default function FleetTrackerMap() {
                     <iframe 
                         title="Vessel Fleet Map"
                         className="w-full h-full border-0"
-                        src={`https://openstreetmap.org{lon-0.08}%2C${lat-0.04}%2C${lon+0.08}%2C${lat+0.04}&layer=mapnik&marker=${lat}%2C${lon}`}
+                        src={`https://windy.com{lat}&lon=${lon}&zoom=7&level=surface&overlay=radar&product=radar&menu=&message=true&marker=true&location=coordinates&type=map&detail=&metricWind=default&metricTemp=default`}
                     ></iframe>
                     {/* Visual Radar Ring Overlay Effect */}
                     <div className="absolute inset-0 pointer-events-none border-2 border-[#0d9488]/5 rounded-lg animate-pulse bg-[radial-gradient(circle_at_center,transparent_40%,#020617_95%)]"></div>
