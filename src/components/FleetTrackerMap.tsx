@@ -42,8 +42,12 @@ export default function FleetTrackerMap() {
         return () => clearInterval(interval);
     }, []);
 
+    // Dynamically calculate the static map image placeholder using open-source OpenStreetMap geometry
+    const lat = telemetry?.latitude ?? 1.2878;
+    const lon = telemetry?.longitude ?? 103.8667;
+    
     return (
-        <div className="bg-[#0f172a] border border-[#0d9488]/30 rounded-xl p-6 shadow-xl backdrop-blur-md">
+        <div className="bg-[#0f172a] border border-[#0d9488]/30 rounded-xl p-6 shadow-xl backdrop-blur-md mt-4">
             <div className="flex items-center justify-between mb-4 border-b border-[#0d9488]/20 pb-3">
                 <h3 className="text-xl font-bold text-[#0d9488] flex items-center gap-2">
                     🌐 Real-Time Spatial Telemetry Matrix
@@ -53,30 +57,44 @@ export default function FleetTrackerMap() {
                 </span>
             </div>
             
-            {/* Visual Radar Grid Box */}
-            <div className="relative h-64 bg-[#020617] border border-[#0d9488]/10 rounded-lg overflow-hidden flex flex-col items-center justify-center p-4">
-                <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#0d9488_1px,transparent_1px),linear-gradient(to_bottom,#0d9488_1px,transparent_1px)] bg-[size:20px_20px] animate-pulse"></div>
+            {/* Visual Geospatial Map Display Container */}
+            <div className="relative h-72 bg-[#020617] border border-[#0d9488]/10 rounded-lg overflow-hidden grid grid-cols-1 md:grid-cols-3">
                 
-                {/* Ship Geo-Location Display Core */}
-                <div className="z-10 text-center space-y-2">
-                    <div className="text-4xl animate-bounce">🚢</div>
-                    <div className="text-lg font-bold text-white tracking-wide">{telemetry?.vessel_name}</div>
-                    <div className="font-mono text-xs text-[#0d9488] bg-[#0d9488]/5 px-3 py-1.5 rounded border border-[#0d9488]/10 inline-block">
-                        LAT: {telemetry?.latitude?.toFixed(4)}°N | LON: {telemetry?.longitude?.toFixed(4)}°E
+                {/* Left Column: Live Interactive Tracking Frame */}
+                <div className="md:col-span-2 relative h-full w-full min-h-[240px]">
+                    <iframe 
+                        title="Vessel Fleet Map"
+                        className="w-full h-full border-0 grayscale opacity-80 contrast-125"
+                        src={`https://openstreetmap.org{lon-0.08}%2C${lat-0.04}%2C${lon+0.08}%2C${lat+0.04}&layer=mapnik&marker=${lat}%2C${lon}`}
+                    ></iframe>
+                    {/* Visual Radar Ring Overlay Effect */}
+                    <div className="absolute inset-0 pointer-events-none border-2 border-[#0d9488]/5 rounded-lg animate-pulse bg-[radial-gradient(circle_at_center,transparent_40%,#020617_95%)]"></div>
+                </div>
+
+                {/* Right Column: Dynamic Data Transponder Panel */}
+                <div className="bg-[#020617] p-4 flex flex-col justify-center space-y-4 border-t md:border-t-0 md:border-l border-[#0d9488]/20 font-mono text-xs">
+                    <div>
+                        <span className="text-slate-500 block uppercase tracking-wider text-[10px] mb-0.5">Active Target</span>
+                        <span className="text-sm font-bold text-white flex items-center gap-1.5">🚢 {telemetry?.vessel_name}</span>
+                    </div>
+                    <div>
+                        <span className="text-slate-500 block uppercase tracking-wider text-[10px] mb-0.5">Geospatial Coordinates</span>
+                        <span className="text-[#0d9488] font-bold text-xs bg-[#0d9488]/5 px-2 py-1 rounded border border-[#0d9488]/10 block mt-1">
+                            {lat?.toFixed(4)}°N | {lon?.toFixed(4)}°E
+                        </span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                        <div className="bg-[#0f172a]/50 p-2 rounded border border-[#0d9488]/10">
+                            <span className="text-slate-500 block text-[9px] uppercase tracking-wider mb-0.5">SOG</span>
+                            <span className="text-xs font-bold text-white">{telemetry?.speed_knots} Kts</span>
+                        </div>
+                        <div className="bg-[#0f172a]/50 p-2 rounded border border-[#0d9488]/10">
+                            <span className="text-slate-500 block text-[9px] uppercase tracking-wider mb-0.5">Heading</span>
+                            <span className="text-xs font-bold text-white">{telemetry?.heading_degrees}°</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Vessel Parameters Info Deck */}
-            <div className="grid grid-cols-2 gap-4 mt-4 font-mono text-sm text-slate-300">
-                <div className="bg-[#020617] p-3 rounded border border-[#0d9488]/10">
-                    <span className="text-slate-500 block text-xs uppercase tracking-wider mb-1">Speed Over Ground</span>
-                    <span className="text-base font-bold text-white">{telemetry?.speed_knots} Knots</span>
-                </div>
-                <div className="bg-[#020617] p-3 rounded border border-[#0d9488]/10">
-                    <span className="text-slate-500 block text-xs uppercase tracking-wider mb-1">True Heading</span>
-                    <span className="text-base font-bold text-white">{telemetry?.heading_degrees}° Degrees</span>
-                </div>
             </div>
         </div>
     );
