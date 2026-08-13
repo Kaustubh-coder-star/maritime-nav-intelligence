@@ -38,7 +38,7 @@ export default function FleetTrackerMap() {
         };
 
         fetchLiveTelemetry();
-        const interval = setInterval(fetchLiveTelemetry, 30000); // Sync every 30 seconds
+        const interval = setInterval(fetchLiveTelemetry, 14400000); // Sync every 4 hours
         return () => clearInterval(interval);
     }, []);
 
