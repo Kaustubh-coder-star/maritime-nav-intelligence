@@ -10,7 +10,7 @@ import WeatherRiskBanner from './components/WeatherRiskBanner';
 import MultiShipAIS from './components/MultiShipAIS';
 import RouteOptimizer from './components/RouteOptimizer';
 import CaptainChat from './components/CaptainChat';
-import FleetTracker from './components/FleetTracker';
+import FleetTracker from './components/FleetTracker';import Dashboard from './components/Dashboard';
 import ETACountdown from './components/ETACountdown';
 import RadarWidget from './components/RadarWidget';
 import TimeMachine from './components/TimeMachine';
@@ -29,7 +29,9 @@ import type { LiveVessel } from './components/MapView';
 import './App.css';
 
 /* ── OCEAN CANVAS (WebGL bioluminescent waves + cursor particles) ── */
-function OceanCanvas() {
+function OceanCanvas() {  if (window.location.pathname === '/dashboard') {
+    return <Dashboard />;
+  }
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouse = useRef({ x: 0.5, y: 0.5 });
   const particles = useRef<
