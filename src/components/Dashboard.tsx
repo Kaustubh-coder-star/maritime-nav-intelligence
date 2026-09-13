@@ -86,4 +86,13 @@ export default function Dashboard() {
                   <td style={{ padding: '8px' }}>{r.parameter_name}</td>
                   <td style={{ padding: '8px', color: '#5eead4', fontWeight: 600 }}>{r.value}</td>
                   <td style={{ padding: '8px' }}>{r.unit}</td>
-                  <td style={{ padding: '8px', color:
+                                <td style={{ padding: '8px', color: '#94a3b8' }}>{r.watch}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  ))}
+</div>
+);
+}
